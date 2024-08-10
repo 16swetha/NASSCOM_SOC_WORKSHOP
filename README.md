@@ -2,10 +2,11 @@
  ### IT IS A 2 WEEKS PROGRAM ORGANIZED BY VSD IN ASSOCIATION WITH NASSCOM</p>
  
 ## CONTENTS
-**DAY-1 : Inception of open-source EDA OpenLANE and sky130 PDK**</p>
+### **DAY-1 : Inception of open-source EDA OpenLANE and sky130 PDK**</p>
 ` DK1Sk1: HOW TO TALK WITH COMPUTERS ` </p>
 
 **DK1Sk1_L1: Introduction to QFN-48 Package chip pads core die and IPs.** </p>
+
 ![Screenshot 2024-08-08 102236](https://github.com/user-attachments/assets/88abd364-c5af-4d64-8d81-76d34bec01ca)</p>
 **ARDUINO BOARD**</p>
 - Arduino boards are open-source electronics platforms based on simple hardware(PCB) and software(IDE,to upload the code).The encircled area is the microprocessor or the chip.The design process of this chip, from the abstract level down to fabrication, is accomplished through the RTL to GDSII flow.</p>
@@ -45,12 +46,14 @@
 - Pins labeled "vdd3v3," "vdd1v8," and "vss" (ground) along the right side indicate the power supply lines. These provide the necessary operating voltages (3.3V, 1.8V) and ground reference to the chip.</p>
 
 **DK1Sk1_L2:Introduction to RISC-V**</p>
+
 ![Screenshot 2024-08-08 104351](https://github.com/user-attachments/assets/2ac918f5-72ff-4065-a56c-a3c45c6f38a4)</p>
 - The image illustrates the intricate relationship between software and hardware in CPU design, using a RISC-V architecture as an example. It starts with a snippet of assembly code written for the RISC-V processor, showcasing fundamental CPU operations. Below, the implementation of the picorv32 CPU core is presented in a Hardware Description Language (likely Verilog or SystemVerilog). This section shows how assembly instructions are translated into logical operations and register transfers within the CPU architecture, including parameters for core features like counters or cache.</p>
 - On the right side, the physical layout of the picorv32 CPU core is depicted, visualized with tools like "qflow." This layout highlights various circuit elements such as logic gates  and flip-flops , along with their interconnections. It represents how transistors and wires are arranged on the silicon die to realize the CPU’s functionality.</p>
 - Overall, the image demonstrates the progression from high-level code through hardware description to the physical realization of the RISC-V core, illustrating the different abstraction levels involved in CPU design.</p>
 
 **Dk1Sk1_L3:From software applications to Hardware**</p>
+
 ![Screenshot 2024-08-08 105151](https://github.com/user-attachments/assets/229525ce-e4e5-42d0-85e7-ec96ea731f93)</p>
 - This image illustrates the complete process from defining the instruction set to the final physical hardware implementation.</p>
 1. **Instruction Set Architecture (ISA):** </p>
@@ -76,6 +79,7 @@
 - **The Google SkyWater 130nm PDK** is an open-source Process Design Kit (PDK) provided by SkyWater Technology Foundry in collaboration with Google. This PDK is notable because it's one of the first openly available PDKs, enabling a broad community of developers, researchers, and hobbyists to design and fabricate their own integrated circuits (ICs) without the need for expensive commercial licenses or proprietary access.</p>
 
 **Dk1Sk2_L2:simplified RTL TO GDSII MODEL**</p>
+
 ![Screenshot 2024-08-09 141423](https://github.com/user-attachments/assets/34a130f0-84c4-4307-a960-6f0fdc0c79aa)</p>
 ![Screenshot 2024-08-09 143244](https://github.com/user-attachments/assets/a7131780-660d-449c-95cb-3aada57fe04e)
  **1. RTL (Register Transfer Level):**</p>
