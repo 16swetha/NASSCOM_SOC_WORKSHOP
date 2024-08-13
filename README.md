@@ -207,7 +207,15 @@ So the LAYOUT will be like:</p>
 The connectivity information between the gates is coded using VHDL/Verilog language and is called as 'Netlist'.</p>
 ![Screenshot 2024-08-10 123503](https://github.com/user-attachments/assets/0eb8831a-802e-48e5-82d2-f647e0fcabce)</p>
 ### RUNNING OF FLOORPLAN
-CRE
+    
+    run_floorplan
+    
+![FLOORPLAN](https://github.com/user-attachments/assets/8d1b09cf-9582-497f-8154-bcbba0b1afab)
+
+  
+   
+
+
 
 
 
