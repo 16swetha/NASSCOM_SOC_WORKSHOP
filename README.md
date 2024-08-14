@@ -335,6 +335,55 @@ Run `picorv32a`
 ![f20](https://github.com/user-attachments/assets/19595c21-b5f7-4dec-93b0-4841ae51cb4c)</p>
 ![f19](https://github.com/user-attachments/assets/007b31a8-c568-414c-82f1-e15f3993fbdb)</p>
 
+`Dk2_Sk3-CELL DESIGN AND CHARACTERIZATION FLOWS`</p>
+
+Steps for characterization and modelling</p>
+S-1 logic synthesis</p>
+S-2 floorplanning</p>
+S-3 placement</p>
+S-4 clock tree synthesis</p>
+S-5 routing</p>
+S-6 static timing analysis</p>
+**CELL DESIGN FLOW**</p>
+Standard cells are present in the library . Library consists of cells of different functionality,sizes and thresholds.Larger the size,Largest the drivestences.</p>
+
+![Screenshot 2024-08-13 183216](https://github.com/user-attachments/assets/902728a5-8e64-4aec-abdb-b662bcbdb784)</p>
+
+![Screenshot 2024-08-13 183533](https://github.com/user-attachments/assets/37178593-6e1a-43cb-8483-5abc8e3bb569)</p>
+
+ The right side of the image shows the metal layers which are used in the fabrication of the circuit. These layers are responsible for connecting different parts of the circuit together. The overall flow of the process is shown by the arrows that connect the different stages of the process. The process is iterative, meaning that the designer may need to go back and make changes to the design at any stage.</p>
+The design steps are:</p>
+- Circuit design
+
+
+![Screenshot 2024-08-13 184131](https://github.com/user-attachments/assets/fc98c351-95ed-4c1c-b1d6-6b4aed7adba1)
+
+![Screenshot 2024-08-13 184357](https://github.com/user-attachments/assets/3a0c823c-5bcf-46b7-a295-13cf90dc1dfe)</P>
+
+- Layout design</p>
+Art of Layout: EULER'S GRAPH , STICK DIAGRAM
+
+![Screenshot 2024-08-13 184406](https://github.com/user-attachments/assets/43c183c5-f6a6-4420-8c80-2e5eba1190ca)</p>
+
+![Screenshot 2024-08-13 185134](https://github.com/user-attachments/assets/2bfd81b2-2041-4aca-a433-b2684991f84d)</p>
+
+- Characterization</p>
+Steps:</p>
+S-1: Read in the modules
+S-2: Read the extract spiece Netlist
+S-3: Behaviour of Buffer
+S-4: Sub ckt of Buffers
+S-5: Attach the power sources
+S-6: Apply the stimulus
+
+
+
+
+
+
+
+
+
 
 
 
