@@ -367,18 +367,45 @@ Art of Layout: EULER'S GRAPH , STICK DIAGRAM
 
 ![Screenshot 2024-08-13 185134](https://github.com/user-attachments/assets/2bfd81b2-2041-4aca-a433-b2684991f84d)</p>
 
-- Characterization</p>
+**Characterization Flow**</p>
 Steps:</p>
-S-1: Read in the modules
-S-2: Read the extract spiece Netlist
-S-3: Behaviour of Buffer
-S-4: Sub ckt of Buffers
-S-5: Attach the power sources
-S-6: Apply the stimulus
+S-1: Read in the modules</p>
+S-2: Read the extract spiece Netlist</p>
+S-3: Behaviour of Buffer</p>
+S-4: Sub ckt of Buffers</p>
+S-5: Attach the power sources</p>
+S-6: Apply the stimulus</p>
+S-7: Output Capacitance</p>
+S-8: Provide the necessary stimulus command</p>
+S-9: Guna software</p>
 
+![Screenshot 2024-08-13 190414](https://github.com/user-attachments/assets/6c0fcd84-16da-413e-9db5-80cfa717a3df)
 
+`Dk2_Sk4-TIMING CHARACTERIZATION PARAMETERS`</p>
 
+![Screenshot 2024-08-13 185725](https://github.com/user-attachments/assets/fca1a1be-01d6-48ac-a1b7-78ba16ed76a7)
+![Screenshot 2024-08-13 190611](https://github.com/user-attachments/assets/fab34e82-9c26-433b-9776-2761dcdc9de5)
+![Screenshot 2024-08-13 191031](https://github.com/user-attachments/assets/c6cc9916-e214-49b5-8e43-4ffe36f8df79) </p>
 
+- Slew Low Rise Threshold: Start point of the rising edge transition.</p>
+- Slew High Rise Threshold: End point of the rising edge transition.</p>
+- Slew Low Fall Threshold: Start point of the falling edge transition.</p>
+- Slew High Fall Threshold: End point of the falling edge transition.</p>
+- Input Rise Threshold: Voltage level where input is considered 'high'.</p>
+- Input Fall Threshold: Voltage level where input is considered 'low'.</p>
+- Output Rise Threshold: Voltage level where output is considered 'high'.</p>
+- Output Fall Threshold: Voltage level where output is considered 'low'.</p>
+ **PROPAGATION DELAY</p>
+ 
+  time(out__thr)-time(in__thr)</p>
+  
+![Screenshot 2024-08-13 191451](https://github.com/user-attachments/assets/40445262-8984-409f-96f4-dd121ce7cd2d)</p>
+
+**TRANSITION TIME**</p>
+
+time(slew_high)-time(slew_low)</p>
+
+![Screenshot 2024-08-13 191911](https://github.com/user-attachments/assets/3133170d-ed6e-4128-9b50-dbf8415e2b6f)</p>
 
 
 
