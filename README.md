@@ -298,6 +298,8 @@ A Library in the context of integrated circuit (IC) design refers to a collectio
 
 Once the netlist is bound to physical cells, the placement tool arranges these cells on the IC layout. This step considers the physical constraints and aims to optimize the placement for minimal delay, power, and area usage.</p>
 
+Consider the circuit diagram</p> 
+![f14](https://github.com/user-attachments/assets/05a75725-cf73-46af-856f-f0b64b735edd)</p>
 
 
 
