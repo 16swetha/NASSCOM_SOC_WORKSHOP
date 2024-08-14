@@ -206,11 +206,81 @@ So the LAYOUT will be like:</p>
 
 The connectivity information between the gates is coded using VHDL/Verilog language and is called as 'Netlist'.</p>
 ![Screenshot 2024-08-10 123503](https://github.com/user-attachments/assets/0eb8831a-802e-48e5-82d2-f647e0fcabce)</p>
+
 ### RUNNING OF FLOORPLAN
     
     run_floorplan
-    
+
+ 
+- **This is the floorplan folder with its directives**
+
+![f1](https://github.com/user-attachments/assets/bc6a5018-e677-4e84-93ac-85b2721390f0)</p>
+ 
+- Here we can see the core utilization is 50% and aspect ratio is 1.These both are by default values.
+
+![f2](https://github.com/user-attachments/assets/381c1b0e-606d-4d89-9713-9bcc94c5a275)</p>
+
+- It is the ` placement `area</p>
+![f3](https://github.com/user-attachments/assets/c9791490-3514-4518-a80a-4ec122450888)</p>
+
+In OpenLANE, FP_PDN files are used to configure the power distribution network, and these switches are set by default during the floorplan stage. The FP_IO MODE setting (1, 0) indicates that pin positioning is random but equally spaced.
+
+In terms of priority, OpenLANE first considers the system default settings in `floorplanning.tcl`, followed by the settings in `config.tcl`, and finally, the settings in the PDK variant file (`sky130A_sky130_fd_sc_hd_config.tcl`).
+
+![f5](https://github.com/user-attachments/assets/1b7ae4e0-9f38-4f71-9cae-77eebcac6721)
+
+![f6](https://github.com/user-attachments/assets/8de234d2-f263-43d7-9d5f-01c756bdb480)
+
+![f7](https://github.com/user-attachments/assets/d9e90bf4-8929-49fd-a519-5270acda3f50)
+
+**THIS IS HOW THE FLOORPLAN WORKS**
+
+![2](https://github.com/user-attachments/assets/ac671417-2f8c-4b4c-af92-518a77e8700e)
+
 ![FLOORPLAN](https://github.com/user-attachments/assets/8d1b09cf-9582-497f-8154-bcbba0b1afab)
+
+### Die Area Calculation
+```bash
+**Given:**
+- Unit distance: 1 micron
+- Die width in unit distance: 660,685
+- Die height in unit distance: 671,405
+
+**Conversions:**
+- Die width in microns = \( \frac{660,685}{1000} = 660.685 \) microns
+- Die height in microns = \( \frac{671,405}{10,000} = 671.405 \) microns
+
+**Area Calculation:**
+- Area of the die in microns = \( 660.685 \times 671.405 = 443,587.212425 \) square microns
+```
+
+### Load Floorplan `.def` File in Magic Tool
+
+To view the generated floorplan using the Magic layout tool, follow these steps:
+
+1. **Change Directory:**
+
+Navigate to the directory containing the generated floorplan `.def` file:
+
+   ```bash
+   cd  /Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/floorplan/
+   ```
+2. **Load the Floorplan in Magic:**
+
+Run the following command to load the floorplan .def file in Magic:
+
+```bash
+magic -T  /Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+![f8](https://github.com/user-attachments/assets/331eb8f0-ad05-4e61-aa86-fe8ade8260ea)
+
+![f9](https://github.com/user-attachments/assets/11c5270c-9a80-469b-b885-2d3d28983863)
+
+![f10](https://github.com/user-attachments/assets/cf42a34b-1439-4ceb-85bb-85b91db9bfd5)
+
+![f11](https://github.com/user-attachments/assets/1100b721-83a2-4940-830b-f696d62eddde)
+
+
 
   
    
