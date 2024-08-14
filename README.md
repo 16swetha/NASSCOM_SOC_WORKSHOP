@@ -212,7 +212,7 @@ The connectivity information between the gates is coded using VHDL/Verilog langu
     run_floorplan
 
  
-- **This is the floorplan folder with its directives**
+**This is the floorplan folder with its directives**
 
 ![f1](https://github.com/user-attachments/assets/bc6a5018-e677-4e84-93ac-85b2721390f0)</p>
  
@@ -263,7 +263,7 @@ To view the generated floorplan using the Magic layout tool, follow these steps:
 Navigate to the directory containing the generated floorplan `.def` file:
 
    ```bash
-   cd  /Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/floorplan/
+   cd  /Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/10-08_12-54/results/floorplan/
    ```
 2. **Load the Floorplan in Magic:**
 
@@ -279,6 +279,12 @@ magic -T  /Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/
 ![f10](https://github.com/user-attachments/assets/cf42a34b-1439-4ceb-85bb-85b91db9bfd5)
 
 ![f11](https://github.com/user-attachments/assets/1100b721-83a2-4940-830b-f696d62eddde)
+
+![f12](https://github.com/user-attachments/assets/1d12ae4c-2de9-40d2-82cf-1333f5292843)
+
+` D2_Sk2-LIBRARY BINDING AND PLACEMENT `</p>
+
+
 
 
 
