@@ -300,6 +300,49 @@ Once the netlist is bound to physical cells, the placement tool arranges these c
 
 Consider the circuit diagram</p> 
 ![f14](https://github.com/user-attachments/assets/05a75725-cf73-46af-856f-f0b64b735edd)</p>
+Signal integrity: </p>
+Signal integrity in PCB (Printed Circuit Board) placement refers to maintaining the quality and fidelity of electrical signals as they travel through a circuit. Good signal integrity ensures that the signals are not distorted, delayed, or lost due to the layout and placement of components on the board. Poor signal integrity can lead to errors, malfunction, and degraded performance of electronic devices.</p>
+
+Optimize placement:</p>
+Optimizing  placement plays a crucial for ensuring signal integrity, minimizing delays, and improving overall performance. The key goal is to reduce the length of critical signal paths and manage capacitance to minimize unwanted effects like signal degradation, noise, and power loss.</p> 
+We add `repeaters`(buffers) inorder to create a new singal between the input and the output such that the data is encrypted correctly and the information is not loss.</p>
+Consider the placement of the ff-1:</p>
+We donot add any buffers as the data can be accessible easily.</p>
+![f15](https://github.com/user-attachments/assets/702b03a7-92f7-4fd1-884c-a3c2404bc3f2)</p>
+
+Now let us consider the ff-2:</p>
+The signal path for `Din2` starts at its input, where it first passes through a buffer to strengthen the signal. It then reaches Flip-Flop 1 (FF1) and continues through additional buffers and logic components labeled "1" and "2." Finally, the signal arrives at Flip-Flop 2 (FF2) and is connected to `Dout2`. Buffers are strategically placed along the path to ensure the signal remains strong and stable, optimizing signal integrity throughout the route.</p>
+![f16](https://github.com/user-attachments/assets/d3f7d8ae-d433-4f29-92be-ccf61c31ac20) </p>
+
+consider ff-3:</p>
+The signal path for `Din3` begins at its input on the left side of the PCB layout. It first reaches Flip-Flop 1 (FF1), then passes through a buffer to strengthen the signal. The signal continues through a logic block labeled "2" and is routed through another buffer before reaching its final destination at Flip-Flop 2 (FF2), which is connected to `Dout3`. Buffers are strategically placed along this path to ensure that the signal remains strong and stable throughout its journey.</p>
+![f17](https://github.com/user-attachments/assets/416bd415-2a46-4bd4-9445-e3557fffe60e)</p>
+
+
+consider ff-4:</p>
+The path of `Din4` begins at the left side of the diagram and first passes through a yellow flip-flop labeled `FF1`. The signal then moves through a green buffer (`Buf`) before entering a green flip-flop, also labeled `FF1`. After that, it passes through a blue flip-flop labeled `FF2`. Finally, the signal exits the diagram as `Dout4` on the right side. This entire path is visually emphasized by being enclosed in a dotted oval in the bottom right section of the diagram.</p>
+
+![f18](https://github.com/user-attachments/assets/7747c1cd-a8d7-455a-85c3-1d4bb849da35)</p>
+
+Congestion-aware placement using RePlAce involves:</p>
+
+Global Placement: Initial rough positioning of cells with a focus on managing congestion.</p>
+Detailed Placement: Fine-tuning of cell positions to optimize local routing and meet design constraints.</p>
+RePlAce integrates both global and detailed placement stages, with an emphasis on managing and reducing congestion throughout the placement process.</p>
+
+Run `picorv32a`
+
+![f20](https://github.com/user-attachments/assets/19595c21-b5f7-4dec-93b0-4841ae51cb4c)</p>
+![f19](https://github.com/user-attachments/assets/007b31a8-c568-414c-82f1-e15f3993fbdb)</p>
+
+
+
+
+
+
+
+
+
 
 
 
