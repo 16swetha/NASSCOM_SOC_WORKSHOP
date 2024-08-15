@@ -407,30 +407,116 @@ time(slew_high)-time(slew_low)</p>
 
 ![Screenshot 2024-08-13 191911](https://github.com/user-attachments/assets/3133170d-ed6e-4128-9b50-dbf8415e2b6f)</p>
 
+### **DAY3 : Design library cells using magic layout and ngspice characterization**
+`Dk3_Sk1-Labs for CMOS Inverter and ngspice simulation`</p>
+Firstly the configruation of the switches was "env(FP_IO_MODE) 1" . we need to change to 2 inorder to get that the syntax is</p>
+"env(FP_IO_MODE) 2" </p>
+run the floorplan and check the pin locations through magic -T</p>
+
+![s1](https://github.com/user-attachments/assets/62d4bc6a-7171-443e-ae36-8e62ce085d5f)
+
+![s2](https://github.com/user-attachments/assets/c539cc81-48d8-4fe1-a6e4-c2132d998219)
+
+![s3](https://github.com/user-attachments/assets/0090f9c4-411b-4702-87eb-6eaf12acaff1)
+
+### SPICE DECK FOR CMOS INVERTER</p>
+
+![Screenshot 2024-08-15 133749](https://github.com/user-attachments/assets/dd8adff3-2a77-4231-b989-b4387cd62c4a)
+
+![Screenshot 2024-08-15 133840](https://github.com/user-attachments/assets/8a7e3324-d5be-4ad6-be53-bcf73ab0338d)
+
+![Screenshot 2024-08-15 134025](https://github.com/user-attachments/assets/fb3c688f-2715-48f8-86a7-f2705612a80b)
+
+![Screenshot 2024-08-15 134631](https://github.com/user-attachments/assets/0522fc31-4b8f-4221-9bf5-81c77331728d)</p>
 
 
+Component Connectivity:
+In this section, we define the connectivity of the substrate pin, which is crucial for adjusting the threshold voltage of the PMOS and NMOS transistors.</p>
+
+Component Values:
+The values for the PMOS and NMOS transistors are defined. Both PMOS and NMOS are chosen to have the same size.</p>
+
+Identifying Nodes:
+Nodes are defined as the points between which a component is connected. These nodes are essential for defining the netlist.</p>
+
+Naming the Nodes:
+The nodes are named as follows: Vin, Vss, Vdd, and out.</p>
+
+Connections:
+- **M1 MOSFET**: The drain is connected to the out node, the gate is connected to the in node, and both the source and substrate of the PMOS transistor are connected to the Vdd node.</p>
+- **M2 MOSFET**: The drain is connected to the out node, the gate is connected to the in node, and both the source and substrate of the NMOS transistor are connected to ground (node 0).</p>
+- **CLOAD**: This capacitor is connected between the out node and ground (node 0) with a value of 10fF.</p>
+- **Supply Voltage (Vdd)**: The supply voltage is connected between the Vdd node and ground (node 0) with a value of 2.5V.</p>
+- **Input Voltage (Vin)**: The input voltage is connected between the Vin node and ground (node 0) with a value of 2.5V.</p>
+
+Simulation Commands:
+Simulation commands are provided to sweep the Vin from 0 to 2.5V with a step size of 0.05V, allowing us to observe Vout as Vin changes.</p>
+
+Final Modeling:
+The final step involves defining the model files, which contain the complete descriptions of the NMOS and PMOS transistors.</p>
+
+### SPICE SIMULATION LAB FOR CMOS
+
+![Screenshot 2024-08-15 135243](https://github.com/user-attachments/assets/ae1e9ffa-16f0-4a30-b2e2-d6ed81f8b9ec)</p>
+
+**DC CHARACTERISTICS**
+
+![Screenshot 2024-08-15 135906](https://github.com/user-attachments/assets/697c1254-36d8-43e5-a9e2-32abe205ce72)</p>
+
+![Screenshot 2024-08-15 140742](https://github.com/user-attachments/assets/568d4588-a35b-45bf-a3dc-efbd701a024f)
+
+![Screenshot 2024-08-15 141017](https://github.com/user-attachments/assets/75ef8a51-2fa8-4b14-9c38-e0bfa0325920)
 
 
+# LABS FOR CMOS
+``` bash
+# Change directory to OpenLane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Clone the repository with the custom inverter design
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+
+# Change into the repository directory
+cd vsdstdcelldesign
+
+# Copy the Magic tech file to the repository directory for easy access
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+
+# Check the contents to ensure everything is present
+ls -ltr
+
+# Command to open the custom inverter layout in Magic
+magic -T sky130A.tech sky130_inv.mag &
+
+```
+![s4](https://github.com/user-attachments/assets/9d35d7d6-5029-421c-96cc-cb2b9087ded0)
+
+![s5](https://github.com/user-attachments/assets/8e183c53-6286-48ae-861d-1b85eaf02ea8)
+
+![s6](https://github.com/user-attachments/assets/41688f36-70c9-444a-a3a3-9c5ac3598c39)
+
+![s7](https://github.com/user-attachments/assets/453684b2-5fd2-4d0e-b337-b8a597d1ff99)
+
+![s8](https://github.com/user-attachments/assets/22a26f69-719f-4fb5-a7ff-29a53f973a67)
+
+![s10](https://github.com/user-attachments/assets/81a0d67a-0b8a-4cd1-87e8-778f33ad6c8b)
 
 
+# MODIFICATIONS
 
+![S11](https://github.com/user-attachments/assets/85f31864-3f5f-4e34-b7ba-7d29fc85908c)
 
+![s12](https://github.com/user-attachments/assets/77553a55-9089-43fc-9a0e-8d7d9927a0ec)
 
+``` bash
+# Command to directly load spice file for simulation to ngspice
+ngspice sky130_inv.spice
 
+# Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
+plot y vs time a
+```
 
-
-
-
-
-  
-   
-
-
-
-
-
-
-
+![s13](https://github.com/user-attachments/assets/de0285b7-9149-45e7-9902-4b27853cb8a8)
 
 
 
