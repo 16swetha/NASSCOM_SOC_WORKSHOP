@@ -518,6 +518,27 @@ plot y vs time a
 
 ![s13](https://github.com/user-attachments/assets/de0285b7-9149-45e7-9902-4b27853cb8a8)
 
+![s14](https://github.com/user-attachments/assets/c5001dce-5bc8-415c-8b24-ffa0244d243f)
+
+![s15](https://github.com/user-attachments/assets/c8fc98b9-367e-47a9-8b8b-8b400cc3b19d)
+
+![s16](https://github.com/user-attachments/assets/f974db7b-2484-4be1-ba1e-f786ff0011e3)
+
+Rise time It is time taken to the output waveform to 20% value to 80% value.</p>
+rise time= (2.24609 - 2.18215)e-09 = 63.94 psec.</p>
+Fall time</p>
+it is the time take by output for transition from 80% to 20%.</p>
+fall time 4 095-4 59</p>
+ fall time= (4.09515 - 4.05269)e-09 = 42.46 psec</p>
+Propagation delay</p>
+it is the time difference between the 50% of input and 50% of the output.</p>
+propogation delay =(2.21086 - 2.15)e-09 = 60.86 psec.</p>
+Cell rise delay</p>
+Time taken by output to rise to 50% and input to fall to 50%</p>
+cell rise delay=(2.21078-2.14992)e-09=60.86psec</p>
+Cell fall delay</p>
+Time taken by output to fall to 50% and input to rise to 50%</p>
+cell fall delay=(4.07586-4.04914)e-09=26.72psec</p>
 
 
 
