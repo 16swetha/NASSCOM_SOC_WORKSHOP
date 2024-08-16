@@ -1,4 +1,4 @@
-## NASSCOM_VSD_SOC_DESIGN_PROGRAM (RTL TO GDSII)
+![a20](https://github.com/user-attachments/assets/8ac0cd02-0be5-4290-b6dd-dd43bf9c076f)## NASSCOM_VSD_SOC_DESIGN_PROGRAM (RTL TO GDSII)
  ### IT IS A 2 WEEKS PROGRAM ORGANIZED BY VSD IN ASSOCIATION WITH NASSCOM</p>
  
 ## CONTENTS
@@ -612,6 +612,27 @@ drc check
 
 ![a10](https://github.com/user-attachments/assets/547b1d42-83d7-4559-9048-6a9be20efd04)
 
+![a11](https://github.com/user-attachments/assets/6e465afd-ec2a-4c9e-8e7c-12f3e7a6acf6)
+
+![a20](https://github.com/user-attachments/assets/cb1b5ada-50a2-44c6-9278-6cb792625b16)
+
+![a12](https://github.com/user-attachments/assets/3c1bcbd5-abcf-424d-a922-5a3434c6735e)
+
+![a13](https://github.com/user-attachments/assets/6afea4fc-8592-4950-8b65-119db465ec6d)
+
+![a14](https://github.com/user-attachments/assets/f89df0d7-80bb-497a-91d8-495a24c4483c)</p>
+
+```bash
+#open the mag file
+```
+![a15](https://github.com/user-attachments/assets/453dc230-5de0-42fe-a243-81f1617e8a7e)
+
+![a16](https://github.com/user-attachments/assets/78af0628-32de-4fa1-8e29-cd8311e94ef9)
+
+![a17](https://github.com/user-attachments/assets/0fc918e4-96f4-4e00-a4c8-7facda719344)
+
+![a18](https://github.com/user-attachments/assets/f500717e-452f-415c-a20e-e6928ab8bd38)
+
+![a19](https://github.com/user-attachments/assets/29457fcc-6235-4f45-bd56-d2048ce5aecd)
 
 
-![Uploading a11.jpg…]()
