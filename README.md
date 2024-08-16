@@ -540,12 +540,78 @@ Cell fall delay</p>
 Time taken by output to fall to 50% and input to rise to 50%</p>
 cell fall delay=(4.07586-4.04914)e-09=26.72psec</p>
 
+`D3_Sk3-Sky130 Tech File labs`</p>
+To Find problem in the DRC section of the old magic tech file for the skywater process and fix them.</p>
+```bash
+# Lab Setup Instructions
+Ensure you have the necessary tools installed:
+- `wget`
+- `tar`
+- `gvim`
+- `magic`
+
+## Step-by-Step Instructions
+
+```bash
+# 1. Change to Home Directory
+cd
+
+# 2. Download the Lab Files
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+# 3. Extract the Lab Files
+tar xfz drc_tests.tgz
+
+# 4. Navigate to the Lab Directory
+cd drc_tests
+
+# 5. List All Files and Directories
+ls -al
+
+# 6. View the .magicrc File
+gvim .magicrc
+
+# 7. Open Magic Tool with Better Graphics
+magic -d XR &
+```
+![a2](https://github.com/user-attachments/assets/c260d657-7962-4abd-846e-364a6cdcb75a)
+
+![a1](https://github.com/user-attachments/assets/f999fb61-3fdb-41df-af12-926552e9fee9)
+
+![a3](https://github.com/user-attachments/assets/6f64e239-2727-4d53-ac6d-b87df38ffa42)
+
+![a4](https://github.com/user-attachments/assets/b47b76f9-3af1-4f45-a333-66c1738ea215)
+
+``` bash
+#in tckon window
+paint v2
+cif see VIA2
+```
+
+![a6](https://github.com/user-attachments/assets/2eda404b-108f-46cc-a74f-137e76550cc8)
+
+![a7](https://github.com/user-attachments/assets/3d1f8dfe-c657-4dc5-ad80-33b1db872148)
+
+
+```bash
+#in tckon window
+load poly
+```
+```bash
+#in order to change the tech file in terminal
+vi sky130A.tech
+```
+```bash
+#in tckon window
+tech load sky130A.tech
+drc check
+```
+![a8](https://github.com/user-attachments/assets/9c853356-5384-4b64-b5ac-3cb5ce9b3568)
+
+![a9](https://github.com/user-attachments/assets/b68e64f0-0a95-461d-a2d3-fa3c73564886)
+
+![a10](https://github.com/user-attachments/assets/547b1d42-83d7-4559-9048-6a9be20efd04)
 
 
 
-
-
-
-
-
-
+![Uploading a11.jpg…]()
