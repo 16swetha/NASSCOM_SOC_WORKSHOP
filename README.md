@@ -1,4 +1,4 @@
-![a20](https://github.com/user-attachments/assets/8ac0cd02-0be5-4290-b6dd-dd43bf9c076f)## NASSCOM_VSD_SOC_DESIGN_PROGRAM (RTL TO GDSII)
+## NASSCOM_VSD_SOC_DESIGN_PROGRAM (RTL TO GDSII)
  ### IT IS A 2 WEEKS PROGRAM ORGANIZED BY VSD IN ASSOCIATION WITH NASSCOM</p>
  
 ## CONTENTS
@@ -634,5 +634,7 @@ drc check
 ![a18](https://github.com/user-attachments/assets/f500717e-452f-415c-a20e-e6928ab8bd38)
 
 ![a19](https://github.com/user-attachments/assets/29457fcc-6235-4f45-bd56-d2048ce5aecd)
+
+
 
 
