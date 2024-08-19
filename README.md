@@ -670,8 +670,45 @@ This process ensures that the custom inverter cell is properly integrated into t
 
 10. **Post-CTS Timing Analysis:**  
     Run post-CTS timing analysis using OpenROAD. Experiment with removing the `sky130_fd_sc_hd__clkbuf_1` cell from the `CTS_CLK_BUFFER_LIST` variable and observe the effects on the timing.
+    ```bash
+    #change the directory to:
+    cd Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd
+    #command
+    ls -ltr (to list the files existing in sky130_fd_sc_hd directory)
+    #open 
+    less tracks.info
+    ```
+Below is the file of tracks.info</p>
+![y1](https://github.com/user-attachments/assets/0d11d846-1e64-4523-b750-4b95e9756f51)
 
+Here’s how you can execute the tasks you've listed:
 
+1. **Change Directory**:
+   ```bash
+   cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+   ```
+
+2. **Open Custom Inverter Layout in Magic**:
+   ```bash
+   magic -T sky130A.tech sky130_inv.mag &
+   ```
+
+3. **Get Syntax for the Grid Command in Magic**:
+   Inside the Magic console, type:
+   ```bash
+   help grid
+   ```
+
+4. **Set Grid Values in Magic**:
+   After you understand the grid command syntax from the help output, you can set the grid as follows:
+   ```tcl
+   grid 0.46um 0.34um 0.23um 0.17um
+   ```
+![y2](https://github.com/user-attachments/assets/e316f3ec-1980-4791-afda-9f3f2173b643)
+
+![y3](https://github.com/user-attachments/assets/f0ae204b-cd3b-46d2-b1df-e611880c37a7)
+
+![y4](https://github.com/user-attachments/assets/1f3a04be-fa55-492a-84fc-c00e5f884ec3)
 
 
 
