@@ -926,6 +926,15 @@ run_placement
 
 ![y23](https://github.com/user-attachments/assets/fc432873-64dd-4c75-8951-b7d6ef87e5ab)
 
+**command to open magic (another terminal)
+```
+# Change directory to path containing generated placement def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs//results/placement/
+
+# Command to load the placement def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
 ![y25](https://github.com/user-attachments/assets/ba38401a-5ce3-4d76-957b-8d351d531f76)
 
 ![y26](https://github.com/user-attachments/assets/02d0978f-898e-4252-aba6-f1f5181b3ae2)
@@ -933,6 +942,56 @@ run_placement
 ![y27](https://github.com/user-attachments/assets/2362b7e8-4c4b-4173-bb7d-14d0aebe7b98)
 
 ![y28](https://github.com/user-attachments/assets/0db4e243-42a9-4596-b488-b14abb3f2b8d)
+
+
+if floorplan doesnt work use:
+```
+init_floorplan
+place_io
+tap_decap_or
+```
+`Dk4_Sk2:TIMING ANALYSIS USING OPENSTA`
+
+ analyzing the setup timing for a system with a single clock.
+
+### Clock Specifications:
+- **Clock Frequency:** 1 GHz
+- **Clock Period (T):** 1 ns
+
+### Timing Analysis Between 0 and T:
+We analyze the timing for the clock period from 0 to T. At time 0, the clock edge triggers the launch flip-flop. By the time T = 1 ns, the second clock edge arrives at the capture flip-flop.
+
+### Combinational Delay:
+Let’s denote the combinational delay as θ. For the system to function correctly, this combinational delay must be less than the clock period, i.e., θ < T.
+
+### Internal Delays and Setup Time:
+When we inspect the capture flip-flop, we find that it contains various components, including MOSFETs, logic gates, resistances, and capacitances. These elements introduce delays that affect the setup timing.
+
+- **Setup Time (S):** This is the minimum amount of time that the data input (D) needs to be stable before the clock edge so that it can be correctly latched by the flip-flop. The delay within the flip-flop, such as the delay introduced by MUX1, is referred to as the setup time, S.
+
+Therefore, the equation becomes:
+\[ \theta < (T - S) \]
+
+### Clock Jitter and Uncertainty:
+Clock jitter refers to the temporary variation in the clock signal’s timing, which is introduced by the Phase-Locked Loop (PLL) generating the clock. Ideally, the clock signal should be generated precisely at 0, T, 2T, etc., but due to variations (jitter), this might not always happen. 
+
+Let’s denote this uncertainty due to jitter as US (Uncertainty). Now, considering this, the timing equation becomes:
+\[ \theta < (T - S - US) \]
+
+### Given Values:
+- **Setup Time (S):** 0.01 ns
+- **Uncertainty (US):** 0.09 ns
+
+Substituting these values into our equation:
+\[ \theta < (1 - 0.01 - 0.09) \text{ ns} \]
+\[ \theta < 0.9 \text{ ns} \]
+
+### Identifying Combinational Path Delay:
+Next, we need to identify the combinational path delay for the logic stages in the circuit. Specifically, we’ll analyze the logic paths in stage 1 and stage 3, which are controlled by a single clock.
+
+Given the constraints above, the combinational delay in these stages must be less than 0.9 ns for the system to function correctly.
+
+
 
 
 
