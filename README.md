@@ -711,5 +711,240 @@ Here’s how you can execute the tasks you've listed:
 ![y4](https://github.com/user-attachments/assets/1f3a04be-fa55-492a-84fc-c00e5f884ec3)
 
 
+This provides a step-by-step process for opening, inspecting, and saving your custom inverter layout using Magic with the Sky130 PDK.
+```
+# Navigate to the working directory
+cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+
+# Open the custom inverter layout in Magic
+magic -T sky130A.tech sky130_vsdinv.mag &
+
+# Check the various port names and their values in Magic
+# Use this command in the Magic console to list all labels (including port names)
+labels
+
+# Alternatively, query specific points in the layout to identify labels and values
+what
+
+# Save the layout after inspection
+save sky130_vsdinv.mag
+```
+![y5](https://github.com/user-attachments/assets/2244d1a9-8642-42b9-a94b-f8049557245d)
+
+![y6](https://github.com/user-attachments/assets/0c2476b1-504c-4600-b0ca-7a0031102f50)
+
+![y7](https://github.com/user-attachments/assets/7a7f154f-551b-40f2-b4bf-58b2fa496653)
+
+![y9](https://github.com/user-attachments/assets/1d1912fb-2761-4434-9987-de058f4d1bd4)
+
+![y10](https://github.com/user-attachments/assets/2292043a-8c3e-405b-954d-9d4c43bd287d)</p>
+
+Open the file 
+
+![y11](https://github.com/user-attachments/assets/a83f3653-1d3d-48b6-b07c-bfe235f15b59)
+
+For copying the LEF file and library files, and then verifying their presence in the destination directory:
+
+```bash
+# Copy the LEF file to the target directory
+cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# List the contents of the target directory to check if the LEF file was copied successfully
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# Copy the library files to the target directory
+cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# List the contents of the target directory to check if the library files were copied successfully
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+```
+This guides us through copying the necessary files and verifying their successful transfer to the specified directory.
+
+![y12](https://github.com/user-attachments/assets/c212fe7c-aaea-4e8f-8002-4eeb053bf15c)
+
+**Checking the typical lib file**</p>
+![y13](https://github.com/user-attachments/assets/6c6cb5b9-690c-4ceb-b8b8-85be3a3040bf)
+
+![y14](https://github.com/user-attachments/assets/9af23813-ea5f-49de-9f46-9033c8e3f3ad)
+
+
+To modify the `config.tcl` file and include the new library file and LEF file in the OpenLane flow, you should add the following commands:
+
+1. **Add the new library file**:
+   ```tcl
+   set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+   set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+   set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+   set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+   ```
+
+2. **Add the new LEF file**:
+   ```tcl
+   set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+   ```
+
+![y16](https://github.com/user-attachments/assets/37e0466a-e0af-4472-8fff-90c080817e8f)</p>
+
+**Setting up and running the OpenLANE flow with the new LEF file and library configuration:**</p>
+
+```bash
+# Step 1: Change directory to the OpenLANE flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Step 2: Enter the OpenLANE flow Docker sub-system
+docker
+
+# Step 3: Invoke the OpenLANE flow in Interactive mode
+./flow.tcl -interactive
+
+# Step 4: Load the required OpenLANE package
+package require openlane 0.9
+
+# Step 5: Prepare the design environment for 'picorv32a'
+prep -design picorv32a
+
+# Step 6: Include the newly added LEF files into the OpenLANE flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Step 7: Run synthesis for the 'picorv32a' design
+run_synthesis
+```
+![y17](https://github.com/user-attachments/assets/4f3af49d-bd63-4027-a378-b7da907d395f)
+
+![y18](https://github.com/user-attachments/assets/f28d27f6-5b16-4dfd-99c8-01e4ede6ab80)
+
+![y19](https://github.com/user-attachments/assets/c7216caa-dc58-4f7f-b890-c8b938cafc4e)
+
+**DELAY TABLES**
+Delay tables are data structures used in digital integrated circuit design to model and store the delay characteristics of components such as gates, interconnects, and cells. They provide detailed information on how long it takes for a signal to propagate through a component under various conditions, helping designers make informed decisions about circuit performance and reliability.
+
+![DELAY](https://github.com/user-attachments/assets/7d537005-3951-4060-8623-12366f094dfa)
+
+![POWER](https://github.com/user-attachments/assets/cd1ed06a-8cf0-4d09-a9a6-e42309d34c97)
+
+In a power-aware clock tree synthesis (CTS), the enable pin functions differently depending on the gate type. For an AND gate, setting the enable pin to logic '1' allows the clock to propagate, while setting it to logic '0' blocks the clock. Conversely, for an OR gate, setting the enable pin to logic '0' enables clock propagation, whereas setting it to logic '1' blocks it. This ability to block the clock during certain periods can significantly reduce power consumption in the clock tree.
+
+**Why Delay Tables Are Essential**
+
+1. **Accurate Timing Analysis**: Delay tables are critical for precise timing analysis. They enable designers to predict circuit behavior and ensure that the circuit meets timing constraints, which is essential for reliable operation. By using delay tables, designers can detect and mitigate potential timing issues before physical implementation.
+
+2. **Performance Optimization**: Understanding delay characteristics helps in optimizing circuit design for better performance. Designers can adjust parameters to reduce critical path delays, balance timing across the circuit, and enhance overall speed and efficiency.
+
+3. **Design Verification**: Delay tables are used to verify that the design meets all timing constraints. This verification process helps prevent timing violations that could lead to functional errors or reduced reliability, ensuring that the final design performs as intended.
+
+4. **Library Characterization**: During the creation of standard cell libraries, delay tables are essential for characterizing each cell's performance under different conditions. This characterization includes variations in load, input slew, voltage, and temperature, which helps in creating accurate models for use in design tools.
+
+**Components of Delay Tables**
+
+- **Input Slew Rate**: Measures the speed at which an input signal transitions between low and high states. Accurate modeling of input slew rate is important for predicting how quickly a signal can change and how it affects the timing of subsequent stages.
+
+- **Output Load**: Represents the capacitance that the output of a gate or cell must drive. Load variations can significantly impact the delay characteristics, making it crucial to include in delay tables.
+
+- **Voltage and Temperature**: Delay can vary with changes in operating voltage and temperature. Delay tables often include data for different voltage and temperature conditions to ensure accurate timing analysis under varying environmental conditions.
+
+- **Transition Time (Slew)**: The time required for a signal to transition from one logic level to another. This is important for ensuring that signals propagate through the circuit at the correct speed.
+
+- **Propagation Delay**: The time it takes for a signal to travel from the input to the output of a cell. This delay is fundamental in timing analysis, as it impacts the overall speed and performance of the circuit.
+
+**Applications of Delay Tables**
+
+1. **Static Timing Analysis (STA)**: STA tools leverage delay tables to calculate the timing of each path in a circuit. They aggregate the delays of individual components along a path to determine the total delay and check if it meets the design's timing constraints. This analysis helps in identifying and addressing timing issues early in the design process.
+
+2. **Timing Closure**: During the place-and-route (P&R) phase, delay tables are used to achieve timing closure. Designers adjust cell placement, routing, and other parameters to minimize delays and meet timing requirements. This process ensures that the design will function correctly in its final form.
+
+3. **Simulation**: Timing simulations use delay tables to predict circuit behavior under different conditions. Accurate delay modeling is essential for functional verification, ensuring that the circuit operates reliably across various scenarios and conditions.
+
+4. **Library Development**: Delay tables are crucial in the development of standard cell libraries. They provide detailed information about each cell's delay characteristics, which is used by EDA tools for timing analysis and optimization. This helps in creating reliable and efficient cells for use in various designs.
+
+**Additional Considerations**
+
+- **Corner Cases**: Delay tables often include data for different "corner" cases, such as fast, typical, and slow process variations. These cases account for variations in manufacturing processes, temperature, and voltage, providing a comprehensive view of potential delays.
+
+- **Dynamic Behavior**: In addition to static delay information, some delay tables may include data on dynamic behavior, such as how delays change with varying input frequencies or signal patterns. This helps in analyzing circuits under more realistic conditions.
+
+- **Integration with EDA Tools**: Delay tables are integrated into Electronic Design Automation (EDA) tools, where they are used for various stages of design, including synthesis, place-and-route, and timing analysis. This integration ensures that the design is optimized and verified using accurate delay information.
+By incorporating delay tables into the design and verification processes, designers can achieve higher performance, better power efficiency, and more reliable digital circuits.
+
+![DELAY2](https://github.com/user-attachments/assets/49a15e3d-4fa8-47e8-958d-aa18291e398e)
+
+![DELAY3](https://github.com/user-attachments/assets/ef80e5ba-013b-469d-a58d-3355fcce50f1)
+
+**RUN THE OPENLANE**
+```tcl
+# Step 1: Change directory to the OpenLANE flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Step 2: Enter the OpenLANE flow Docker sub-system
+docker
+
+# Step 3: Invoke the OpenLANE flow in Interactive mode
+./flow.tcl -interactive
+
+# Step 4: Load the required OpenLANE package
+package require openlane 0.9
+
+# Step 5: Prepare the design environment, overwriting existing setup
+prep -design picorv32a -tag 16-08_08-39 -overwrite 
+
+# Step 6: Include the newly added LEF files into the OpenLANE flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Step 7: Display the current value of the SYNTH_STRATEGY variable
+echo $::env(SYNTH_STRATEGY)
+
+# Step 8: Set a new value for the SYNTH_STRATEGY variable
+set ::env(SYNTH_STRATEGY) 1
+
+# Step 9: Display the current value of the SYNTH_BUFFERING variable to check if it's enabled
+echo $::env(SYNTH_BUFFERING)
+
+# Step 10: Display the current value of the SYNTH_SIZING variable
+echo $::env(SYNTH_SIZING)
+
+# Step 11: Set a new value for the SYNTH_SIZING variable
+set ::env(SYNTH_SIZING) 1
+
+# Step 12: Display the current value of the SYNTH_DRIVING_CELL variable to verify the correct cell
+echo $::env(SYNTH_DRIVING_CELL)
+
+# Step 13: Run synthesis for the design
+run_synthesis
+
+# Step 14: Run floorplanning
+run_floorplan
+
+# Step 15: Run placement
+run_placement
+```
+
+
+![y21](https://github.com/user-attachments/assets/c5132b27-0c94-42cb-85a3-da98380f408a)
+
+![y22](https://github.com/user-attachments/assets/f1eee549-473c-4773-a46f-7a330c8e8144)
+
+![y23](https://github.com/user-attachments/assets/fc432873-64dd-4c75-8951-b7d6ef87e5ab)
+
+![y25](https://github.com/user-attachments/assets/ba38401a-5ce3-4d76-957b-8d351d531f76)
+
+![y26](https://github.com/user-attachments/assets/02d0978f-898e-4252-aba6-f1f5181b3ae2)
+
+![y27](https://github.com/user-attachments/assets/2362b7e8-4c4b-4173-bb7d-14d0aebe7b98)
+
+![y28](https://github.com/user-attachments/assets/0db4e243-42a9-4596-b488-b14abb3f2b8d)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
