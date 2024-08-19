@@ -636,5 +636,43 @@ drc check
 ![a19](https://github.com/user-attachments/assets/29457fcc-6235-4f45-bd56-d2048ce5aecd)
 
 
+### DAY-4 PRELAYOUT TIMING ANALYSIS AND IMPORTANCE OF GOOD CLOCK TREE :</p>
+`SK1 Timing modelling using delay tables:`</p>
+In this sk we will get about the process to fix the small DRC errors and integrate a custom inverter cell into the OpenLane flow:</p>
+This process ensures that the custom inverter cell is properly integrated into the design and that all timing and design rule checks are satisfied.</p>
+
+1. **Fix DRC Errors and Verify Design:**  
+   Ensure the input and output ports of the standard cell align with the intersection of the vertical and horizontal tracks. The width of the standard cell should be an odd multiple of the horizontal track pitch, and the height should be an even multiple of the vertical track pitch. You can verify these conditions by referencing the `track.info` file located in the PDK at `pdk/sky130/libs.tech/openlane/sky130_fd_sc_hd/track.info`.
+
+2. **Save and Open Finalized Layout:**  
+   After fixing the DRC errors, save the finalized layout with a custom name. Reopen it to ensure that all changes are intact.
+
+3. **Generate LEF from Layout:**  
+   Generate a LEF file from the finalized layout, which describes the physical properties of the custom inverter cell.
+
+4. **Copy LEF and Associated Files:**  
+   Copy the newly generated LEF file along with the required library files to the `src` directory of the `picorv32a` design.
+
+5. **Update `config.tcl`:**  
+   Edit the `config.tcl` file to include the new LEF file and update the library file paths to ensure the custom inverter cell is included in the OpenLane flow.
+
+6. **Run Synthesis in OpenLane:**  
+   Execute the synthesis process with the custom inverter cell included. During synthesis, you may need to adjust design parameters to remove or reduce any violations introduced by the custom cell.
+
+7. **Verify Cell in PnR Flow:**  
+   Once synthesis is successful, run the floorplan and placement steps to ensure the custom inverter cell is correctly integrated into the PnR flow.
+
+8. **Post-Synthesis Timing Analysis:**  
+   Perform post-synthesis timing analysis using the OpenSTA tool. Address any timing violations by making Timing ECO (Engineering Change Order) fixes.
+
+9. **Update Netlist and Continue Flow:**  
+   Replace the old netlist with the new one generated after the timing ECO fixes. Proceed with floorplanning, placement, and clock tree synthesis (CTS).
+
+10. **Post-CTS Timing Analysis:**  
+    Run post-CTS timing analysis using OpenROAD. Experiment with removing the `sky130_fd_sc_hd__clkbuf_1` cell from the `CTS_CLK_BUFFER_LIST` variable and observe the effects on the timing.
+
+
+
+
 
 
