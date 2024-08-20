@@ -1191,7 +1191,57 @@ To improve the clock tree, we can adopt a smarter approach. By placing the clock
 
 Similarly, `clk2` can be connected to its respective flip-flops using this midpoint strategy to ensure better synchronization.
 
-Now, let's discuss clock tree synthesis (CTS) with buffering. As the clock signal routes through the design to reach specific locations and clock endpoints, it encounters various resistances and capacitances along the way. This process, known as clock tree synthesis, involves adding buffers or inverters to the clock network to manage these resistances and capacitances, ensuring that the clock signal is delivered uniformly and within timing constraints.
+Now, clock tree synthesis (CTS) with buffering, As the clock signal routes through the design to reach specific locations and clock endpoints, it encounters various resistances and capacitances along the way. This process, known as clock tree synthesis, involves adding buffers or inverters to the clock network to manage these resistances and capacitances, ensuring that the clock signal is delivered uniformly and within timing constraints.
+
+The circuit is designed to ensure that the clock signals (CLK1 and CLK2) are distributed evenly across the design, with minimal skew, by strategically placing buffers and using a midpoint insertion strategy. This approach improves the overall timing performance and ensures that all flip-flops operate in sync.
+
+
+![Screenshot 2024-08-18 124139](https://github.com/user-attachments/assets/86abb3fe-20c9-415f-bbf1-3acb145d2e08)
+
+![Screenshot 2024-08-18 124225](https://github.com/user-attachments/assets/8f3a3170-755a-489e-a0b5-026927d0f784)
+
+
+![Screenshot 2024-08-18 124743](https://github.com/user-attachments/assets/29edb436-717d-4b8d-a423-10b3c5268aa6)
+
+![Screenshot 2024-08-18 130155](https://github.com/user-attachments/assets/0099afe9-6a29-418c-9f38-389128af1cd6)
+
+ **Impact of Crosstalk Delta Delay on Skew** 
+- **Crosstalk:** Crosstalk refers to the unwanted interference between adjacent signal lines (nets) in a circuit. This interference can cause delays in signal propagation, which is particularly problematic in timing-sensitive paths like clock networks.
+- **Delta Delay (Δ):** Crosstalk can introduce an additional delay (`Δ`) to the affected signal, altering its arrival time at the destination.
+
+### **Illustration Details:**
+1. **Before and After Crosstalk:**
+   - Before crosstalk, a signal propagates with a delay `D`.
+   - After crosstalk occurs, the delay increases to `D + Δ`, where `Δ` is the delay caused by crosstalk.
+
+2. **Effect on Clock Skew:**
+   - **L1 and L2:** The image shows two signal paths, labeled as `L1` and `L2`, that are affected differently by crosstalk.
+   - Without crosstalk, the lengths of the paths would ideally be the same (L1 = L2), ensuring minimal or no skew.
+   - Due to crosstalk, the delay on one path (`L2`) increases by `Δ`, causing the path length to effectively become `L2 + Δ`.
+   - **Skew:** The skew is then calculated as `Skew = L1 - (L2 + Δ)`, which simplifies to `Skew = Δ`.
+
+The presence of crosstalk can introduce additional delays in signal paths, leading to skew in clock signals. This skew can cause timing mismatches in synchronous circuits, potentially leading to incorrect operation. The image highlights the importance of managing crosstalk during the design process to maintain timing integrity.
+
+```
+# Check syntax
+help write_verilog
+
+# Overwriting current synthesis netlist
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/16-08_/results/synthesis/picorv32a.synthesis.v
+
+# Exit from OpenSTA since timing analysis is done
+exit
+```
+
+![y14](https://github.com/user-attachments/assets/569af26e-0ec3-424e-b136-7f88ad3dd4ce)
+
+![y16](https://github.com/user-attachments/assets/c01f0e62-a040-4e15-b8bd-010e8a1944ea)
+
+
+
+
+
+
 
 
 
