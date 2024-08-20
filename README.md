@@ -1272,10 +1272,10 @@ Setup analysis with real clock
 openroad
 
 # Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/29-07_10-25/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/16-08_08-39/tmp/merged.lef
 
 # Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/16-08_08-39/results/cts/picorv32a.cts.def
 
 # Creating an OpenROAD database to work with
 write_db pico_cts.db
@@ -1325,7 +1325,6 @@ exit
 ![y34](https://github.com/user-attachments/assets/652312fd-490d-427d-b5b0-2a9cc8048bce)
 
 ![y36](https://github.com/user-attachments/assets/98a47941-4f01-4a42-8a38-e45ad7c955c1)
-
 
 ![y37](https://github.com/user-attachments/assets/14459a9c-277a-4b79-8c53-5873279c8681)
 
