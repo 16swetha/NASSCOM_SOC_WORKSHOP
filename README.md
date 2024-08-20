@@ -989,20 +989,209 @@ Substituting these values into our equation:
 ### Identifying Combinational Path Delay:
 Next, we need to identify the combinational path delay for the logic stages in the circuit. Specifically, we’ll analyze the logic paths in stage 1 and stage 3, which are controlled by a single clock.
 
-Given the constraints above, the combinational delay in these stages must be less than 0.9 ns for the system to function correctly.
+Given the constraints above, the combinational delay in these stages must be less than 0.9 ns for the system to function correctly
+Post synthesis analysis with OPENSTA:
+
+1. **Change Directory**:
+   - Navigate to the OpenLANE working directory:
+     ```bash
+     cd Desktop/work/tools/openlane_working_dir/openlane
+     ```
+
+2. **Start Docker**:
+   - Start the OpenLANE Docker container (this step isn't shown in detail but implied).
+
+3. **Enter Interactive Mode**:
+   - Once inside the Docker container, invoke the OpenLANE flow in interactive mode:
+     ```bash
+     ./flow.tcl -interactive
+     ```
+
+4. **Load Required Packages**:
+   - Load the necessary OpenLANE packages:
+     ```tcl
+     package require openlane 0.9
+     ```
+
+5. **Prepare the Design**:
+   - Prepare the design environment for `picorv32a`:
+     ```tcl
+     prep -design picorv32a
+     ```
+
+6. **Add LEF Files**:
+   - Add newly added LEF files to the flow:
+     ```tcl
+     set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+     add_lefs -src $lefs
+     ```
+
+7. **Set SYNTH_SIZING**:
+   - Set a new value for the `SYNTH_SIZING` environment variable:
+     ```tcl
+     set ::env(SYNTH_SIZING) 1
+     ```
+
+8. **Run Synthesis**:
+   - Finally, run the synthesis process:
+     ```tcl
+     run_synthesis template
+     ```
+After running the syntheis we need to setup the `pre_sta.conf ` file for the configuration
+
+![y1](https://github.com/user-attachments/assets/870d921f-d44d-44dc-b6a3-0bade2b3fac5)
+
+![WhatsApp Image 2024-08-19 at 23 40 11_271ea33e](https://github.com/user-attachments/assets/8287802b-d6ef-41ef-93b9-d209a02e12c1)
+
+Newly created ` my_base.sdc `for STA analysis in `openlane/designs/picorv32a/src` directory based on the file `openlane/scripts/base.sdc`
+
+![y4](https://github.com/user-attachments/assets/2608424d-f248-471b-a73c-d9c0fe9b500c)
+
+![y3](https://github.com/user-attachments/assets/4b8e53f4-9483-40e4-9164-781782256e66)
+
+
+1. **Change Directory**:
+   - Navigate to the OpenLANE working directory:
+     ```bash
+     cd Desktop/work/tools/openlane_working_dir/openlane
+     ```
+
+2. **Invoke OpenSTA Tool**:
+   - Run the OpenSTA (Open Static Timing Analyzer) tool with a specific configuration script:
+     ```bash
+     sta pre_sta.conf
+     ```
+
+This sequence will navigate to the OpenLANE directory and then invoke the OpenSTA tool using the `pre_sta.conf` script for timing analysis. 
+
+![y6](https://github.com/user-attachments/assets/7a3006ae-036e-4345-a90a-f1dbaf10ba71)
+
+
+![y17](https://github.com/user-attachments/assets/36d8d49b-bcc1-456e-bd92-b61c8c709ce7)
 
 
 
+We see the fanout causing more delay so we need to do the synthesis again:
 
+use the same with the changes of delay and the sizing following commands:
+```
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a -tag 16-08_08-29 -overwrite
 
+# Adiitional commands to include newly added lef to openlane flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
 
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
 
+# Command to set new value for SYNTH_MAX_FANOUT
+set ::env(SYNTH_MAX_FANOUT) 4
 
+# Command to display current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
 
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+# Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
 
+# Command to invoke OpenSTA tool with script
+sta pre_sta.conf
+```
+![y7](https://github.com/user-attachments/assets/c57638fa-d473-4615-a836-31ec7eb0cd39)
 
+we can see the difference between tns and the wns value from first to the next step as been decreased 
+**Make timing ECO FIXES TO REMOVE ALL VIOLATION**
+OR gate of driving strength 2 is driving 4 fanouts
+![y8](https://github.com/user-attachments/assets/a0868196-85fa-4f2b-b4cc-1c41cb7c98c8)
 
+1. **Report All Connections to a Net**:
+   - To report all connections to a specific net (`_11668_` in this case):
+     ```tcl
+     report_net -connections _11668_
+     ```
 
+2. **Replace a Cell**:
+   - To replace a cell (`_14506_`) with another cell (`sky130_fd_sc_hd__or4_4`):
+     ```tcl
+     replace_cell _14506_ sky130_fd_sc_hd__or4_4
+     ```
+
+3. **Generate a Custom Timing Report**:
+   - To generate a custom timing report with specific fields (`net`, `cap`, `slew`, `input_pins`) and a precision of 4 digits:
+     ```tcl
+     report_checks -fields {net cap slew input_pins} -digits 4
+     ```
+![y9](https://github.com/user-attachments/assets/6882a360-a407-46df-9fca-a44025bd3c6c)
+
+![y10](https://github.com/user-attachments/assets/3c8950ea-ee48-4a91-9ad9-096a2c8f990d)
+```
+# Reports all the connections to a net
+report_net -connections _11675_
+
+# Replacing cell
+replace_cell _14514_ sky130_fd_sc_hd__or3_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+![y11](https://github.com/user-attachments/assets/d522455a-5b4c-4567-bd6c-b121515b85de)
+```
+# Reports all the connections to a net
+report_net -connections _11643_
+
+# Replacing cell
+replace_cell _14481_ sky130_fd_sc_hd__or4_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+![y12](https://github.com/user-attachments/assets/0f18c891-af02-4ff5-8827-92d0bbea6135)
+
+```
+# Reports all the connections to a net
+report_net -connections _11668_
+
+# Replacing cell
+replace_cell _14506_ sky130_fd_sc_hd__or4_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+![y13](https://github.com/user-attachments/assets/dfd3a2e2-f684-4cb6-9dbd-f412cd75c888)
+
+![y14](https://github.com/user-attachments/assets/83962e10-ad54-499a-8dc8-7884a1799121)
+
+By this we see that the SLACK has been reduced
+
+`Dk4_SK3 Clock Tree Synthesis TritonCTS and signal integrity`
+
+**CLOCK TREE ROUTING AND BUFFERING USING H TREE ALGO**
+
+![Screenshot 2024-08-18 123710](https://github.com/user-attachments/assets/80acb2de-bc18-4616-ae88-ad5db37011a1)
+
+![Screenshot 2024-08-18 123721](https://github.com/user-attachments/assets/07fa2600-f7b6-4314-b02e-1562fac46f8a)
+
+![Screenshot 2024-08-18 123734](https://github.com/user-attachments/assets/687862f8-1de5-4fb6-8620-613db87aab6b)
+
+![Screenshot 2024-08-18 124048](https://github.com/user-attachments/assets/0df639a2-639e-4b92-a997-c7d5b09fcb66)
+
+Here’s a rephrased version of your explanation:
+
+---
+
+**Clock Tree Synthesis:**
+
+Let's consider a scenario where `clk1` is connected to `FF1` and `FF2` of stage 1, as well as `FF1` of stage 3 and `FF2` of stage 4 using physical wiring. In this setup, there is a problem that arises due to physical distances between the clock source and the flip-flops. Specifically, the time taken for the clock signal to reach `FF2` (`t2`) is greater than the time to reach `FF1` (`t1`), resulting in a skew.
+
+Skew is defined as `t2 - t1`, and ideally, skew should be 0 ps to ensure that the clock signal reaches all flip-flops simultaneously. In this example, we have created a poor clock tree, which leads to timing issues.
+
+To improve the clock tree, we can adopt a smarter approach. By placing the clock source closer to a midpoint relative to all the flip-flops, the clock signal will reach each flip-flop almost simultaneously, reducing skew.
+
+Similarly, `clk2` can be connected to its respective flip-flops using this midpoint strategy to ensure better synchronization.
+
+Now, let's discuss clock tree synthesis (CTS) with buffering. As the clock signal routes through the design to reach specific locations and clock endpoints, it encounters various resistances and capacitances along the way. This process, known as clock tree synthesis, involves adding buffers or inverters to the clock network to manage these resistances and capacitances, ensuring that the clock signal is delivered uniformly and within timing constraints.
 
 
 
