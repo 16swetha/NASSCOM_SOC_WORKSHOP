@@ -1237,12 +1237,97 @@ exit
 
 ![y16](https://github.com/user-attachments/assets/c01f0e62-a040-4e15-b8bd-010e8a1944ea)
 
+![y19](https://github.com/user-attachments/assets/a77829d1-5a04-4edb-a3f4-6489c9e20b6e)
+
+![y18](https://github.com/user-attachments/assets/e3a42a62-5f5f-4bbc-8a26-34cca2a09e20)
+Verified that the netlist is overwritten by checking that instance `_14506_ `is replaced with `sky130_fd_sc_hd__or4_4`
+```
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+```
+
+RUN `run_cts`
 
 
+![y20](https://github.com/user-attachments/assets/c921279a-984b-4c03-9fa7-7acbad3d8cc3)
+
+![y21](https://github.com/user-attachments/assets/0732132c-7cab-4bf8-b789-6bbda4336202)
+
+![y26](https://github.com/user-attachments/assets/53b577d6-4ecc-457f-91f0-60b28917b313)
+
+tcl folders</p>
+
+![y24](https://github.com/user-attachments/assets/64b7f9c4-007b-46ad-9b72-568b04f616c9)
+
+![y22](https://github.com/user-attachments/assets/10a08879-b5b4-46e9-90b8-eeb2582d5092)
+
+`Dk4_Sk4-Timing analysis with real clocks using openSTA`
+
+Setup analysis with real clock
+```
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/29-07_10-25/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/cts/picorv32a.cts.def
+
+# Creating an OpenROAD database to work with
+write_db pico_cts.db
+
+# Loading the created database in OpenROAD
+read_db pico_cts.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/16-08_08-39/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Check syntax of 'report_checks' command
+help report_checks
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit to OpenLANE flow
+exit
+```
+
+![y27](https://github.com/user-attachments/assets/82585ad5-498e-4316-bc17-2e97d1581a2b)
+
+![WhatsApp Image 2024-08-19 at 23 40 39_7613e332](https://github.com/user-attachments/assets/a843e0c3-6b2a-4ede-ae83-f944975285cd)
+
+![y28](https://github.com/user-attachments/assets/ff013286-1cc7-401f-8c5f-b7093447dced)
+
+![y29](https://github.com/user-attachments/assets/df47b96d-a9e4-4e7c-95f9-824bb049c384)
+
+![y30](https://github.com/user-attachments/assets/e8b0177d-aeba-4f2a-9af6-02b820ca6727)
+
+![y31](https://github.com/user-attachments/assets/de110b81-e5ac-48e7-8344-18a1392af11a)
+
+![y32](https://github.com/user-attachments/assets/89a02984-39ad-4cd8-a4bb-c6d47bf22cd5)
+
+![y34](https://github.com/user-attachments/assets/652312fd-490d-427d-b5b0-2a9cc8048bce)
+
+![y36](https://github.com/user-attachments/assets/98a47941-4f01-4a42-8a38-e45ad7c955c1)
 
 
-
-
+![y37](https://github.com/user-attachments/assets/14459a9c-277a-4b79-8c53-5873279c8681)
 
 
 
