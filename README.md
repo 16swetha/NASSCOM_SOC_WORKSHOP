@@ -1518,6 +1518,36 @@ cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-08
 
 ![s21](https://github.com/user-attachments/assets/00e874b3-20ad-4ee8-9875-c97f4044adc3)
 
+### TritonRoute Overview:
+
+**TritonRoute** is a detailed routing tool used in the physical design stage of integrated circuits (ICs). It's particularly effective for complex designs, including those at advanced technology nodes. Here’s a summary of its key features:
+
+#### **1. Preprocessed Route Guides:**
+- **Functionality:** Utilizes route guides generated during the global routing stage.
+- **Benefit:** Streamlines detailed routing by reducing the search space, leading to faster and more efficient routing.
+
+#### **2. Inter-Guide Connectivity:**
+- **Functionality:** Manages connectivity between different routing guides.
+- **Benefit:** Ensures optimal connections for performance and manufacturability, maintaining continuity across routing segments.
+
+#### **3. Intra- & Inter-Layer Routing:**
+- **Intra-Layer Routing:** Manages connections within the same metal layer.
+- **Inter-Layer Routing:** Handles connections between different metal layers, carefully managing transitions with vias and other strategies.
+
+#### **4. Intra-Layer Parallel and Inter-Layer Sequential Panel Routing:**
+- **Intra-Layer Parallel Routing:** Handles multiple tasks simultaneously within the same layer, improving efficiency.
+- **Inter-Layer Sequential Panel Routing:** Ensures orderly and conflict-free connections between layers, adhering to design rules.
+
+#### **5. Connectivity Access Point Handling:**
+- **Functionality:** Manages critical access points for net connections.
+- **Benefit:** Ensures reliable connections even in dense or complex designs by effectively handling access points and clusters.
+
+#### **6. Access Point Cluster Management:**
+- **Functionality:** Optimizes routing by managing groups of potential connection points.
+- **Benefit:** Reduces congestion, enhancing overall design performance.
+
+These features make TritonRoute a powerful tool in the VLSI design process, enabling precise and efficient routing in both simple and complex IC designs.
+
 
 
 
